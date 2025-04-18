@@ -37,6 +37,16 @@ class FileUpload(BaseModel):
     filename: str
     file_content: str  # base64 encoded content
 
+# Add this after the existing FileUpload class
+class AnalyticsRequest(BaseModel):
+    filename: str
+    file_content: str  # base64 encoded content
+    n_frequent_words: int = 5
+    n_topics: int = 5
+    n_clusters: int = 5
+    start_date: str
+    end_date: str
+
 # Global variable to store Analytics instance
 chat_analyzer = None
 
@@ -163,6 +173,59 @@ async def get_conversation_summary(start_date: str, end_date: str):
             "message": "Analysis completed",
             "summary": summary
         }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Add this after the other endpoints
+@app.post("/all")
+async def get_all_analytics(request: AnalyticsRequest):
+    import os
+    import torch
+    os.environ["CUDA_VISIBLE_DEVICES"] = ""
+    torch.set_num_threads(4)
+    try:
+        # First process the file upload
+        content = base64.b64decode(request.file_content).decode('utf-8')
+        
+        # Save to temporary file
+        temp_file = "temp_chat.txt"
+        with open(temp_file, "w", encoding='utf-8') as f:    
+            f.write(content)
+        
+        # Initialize Analytics
+        global chat_analyzer
+        chat_analyzer = Analytics(temp_file)
+
+        # Now process all analytics
+        results = {
+            "frequent_words": {
+                "visualization": chat_analyzer.get_top_frequent_words(request.n_frequent_words)
+            },
+            "message_length": chat_analyzer.message_length_analysis(),
+            "active_time": {
+                "visualization": chat_analyzer.active_time_analysis()
+            },
+            "user_interaction": {
+                "visualization": chat_analyzer.user_interaction()
+            },
+            "topic_modeling": chat_analyzer.topic_modeling(request.n_topics),
+            "similar_conversations": {
+                "visualization": chat_analyzer.similar_conversations(request.n_clusters)
+            },
+            "sentiment": {
+                "visualization": chat_analyzer.sentiment_dashboard()
+            },
+            "conversation_summary": chat_analyzer.get_conversation_summary(
+                request.start_date, 
+                request.end_date
+            )
+        }
+        
+        return {
+            "message": "File processed and all analyses completed successfully",
+            "data": results
+        }
+        
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

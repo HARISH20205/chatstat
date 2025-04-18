@@ -14,3 +14,4 @@ uvicorn
 google-genai
 google-generativeai
 kaleido
+torch

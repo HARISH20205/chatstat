@@ -1,0 +1,45 @@
+{
+    "message": "File processed and all analyses completed successfully",
+    "data": {
+        "frequent_words": {
+            "visualization": ""
+        },
+        "message_length": {
+            "stats": {
+                " Jagadeeswaran MIC": 114.39922480620154,
+                " Harish20205": 105.32121212121213,
+                " Darani(MIC)": 70.56657608695652,
+                " Ganapathy (MIC)": 44.443396226415096,
+                "system": 36.696969696969695,
+                " Avinash MIC": 21.222727272727273,
+                " Santhosh Vit": 16.023310023310025,
+                " Ashwin MIC": 14.043103448275861
+            },
+            "visualization": ""
+        },
+        "active_time": {
+            "visualization": ""
+        },
+        "user_interaction": {
+            "visualization": ""
+        },
+        "topic_modeling": {
+            "topics": [
+                "Topic 1: pan, character, option, votes, throw",
+                "Topic 2: da, ok, illa, enna, ithu",
+                "Topic 3: id, mod, book, data, session",
+                "Topic 4: fuzzy, https, da, code, branch",
+                "Topic 5: message, deleted, import, edited, ah"
+            ]
+        },
+        "similar_conversations": {
+            "visualization": ""
+        },
+        "sentiment": {
+            "visualization": ""
+        },
+        "conversation_summary": {
+            "summary": "The chat log shows the creation of a group named \"9/11 Survivors💀\" by Ganapathy (MIC), who initially made the user an admin and then revoked and reinstated admin privileges. Ganapathy configured the group settings to restrict actions like posting, adding members, and editing group settings to admins only. Darani (MIC) sent and deleted multiple messages. Later, the conversation shifted to a Teams meeting, attendance confirmation, and a Google Forms link shared by Harish20205. Avinash MIC posted questions related to Virtual machine representations and constant value substitution, providing answers. Finally, Darani(MIC) mentioned a date, and Santhosh Vit shared attendance forms."
+        }
+    }
+}
