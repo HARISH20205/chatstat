@@ -324,6 +324,8 @@ class Analytics:
         plt.ylabel("Avg Message Length")
         plt.tight_layout()
         
+        
+        
         buf = io.BytesIO()
         plt.savefig(buf, format='png', bbox_inches='tight')
         plt.close()
