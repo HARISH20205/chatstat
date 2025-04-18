@@ -251,6 +251,7 @@ class Analytics:
         except Exception as e:
             print(f"An unexpected error occurred: {e}")
             exit(1)             
+        nltk.download('stopwords')
         combined_data = self.combine_multiline_messages(self.data)
         self.df = pd.DataFrame(combined_data)
         self.df["date"] = self.df[0].str.split(" ", expand=True)[0]
